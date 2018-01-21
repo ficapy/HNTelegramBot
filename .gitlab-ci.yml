@@ -13,6 +13,7 @@ deploy:
 #  tags:
 #    - TelegramBot
 #  when: manual
+
   variables:
     SERVER: deploy
   before_script:
