@@ -31,5 +31,5 @@ def message():
                         text="*{text}* [{url}]({url})".format(text=item.title, url=item.url),
                         parse_mode=ParseMode.MARKDOWN, reply_markup=reply_markup)
 
-
+bot.sendMessage(chat_id="@MyHN_Bot",text="Everything is OK👌")
 scheduler.start()
