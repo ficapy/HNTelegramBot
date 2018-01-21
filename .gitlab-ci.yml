@@ -10,8 +10,8 @@ deploy:
   stage: deploy
   only:
     - master
-  tags:
-    - TelegramBot
+#  tags:
+#    - TelegramBot
 #  when: manual
   variables:
     SERVER: deploy
