@@ -1,0 +1,26 @@
+image: ficapy/docker:latest
+
+stages:
+  - deploy
+
+variables:
+  HOST: "Host deploy \n  User  root \n CheckHostIp no \n HostName 173.212.241.81 \n StrictHostKeyChecking no"
+
+deploy:
+  stage: deploy
+  only:
+    - master
+  tags:
+    - TelegramBot
+#  when: manual
+  variables:
+    SERVER: deploy
+  before_script:
+    - eval $(ssh-agent -s)
+    - bash -c "ssh-add <(echo '$SSH_PRIVATE_KEY')"
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "$HOST" > ~/.ssh/config'
+  script:
+    - ssh $SERVER "mkdir -p ~/$CI_PROJECT_NAME || true"
+    - rsync -r . $SERVER:~/$CI_PROJECT_NAME
+    - ssh $SERVER "cd $CI_PROJECT_NAME/deploy && TOKEN=$TOKEN docker-compose up --build -d"
