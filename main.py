@@ -33,4 +33,5 @@ def message():
 
 
 bot.sendMessage(chat_id="@MyHN_Bot", text="Everything is OK👌")
+scheduler.get_job(job_id="telegram").func()
 scheduler.start()
