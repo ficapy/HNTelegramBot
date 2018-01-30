@@ -4,6 +4,7 @@
 # Create: '21/01/2018'
 
 import os
+import time
 from apscheduler.schedulers.blocking import BlockingScheduler
 from telegram import Bot, ParseMode, InlineKeyboardButton, InlineKeyboardMarkup
 from hackernews import HackerNews
@@ -30,8 +31,8 @@ def message():
         bot.sendMessage(chat_id="@MyHN_Bot",
                         text="*{text}* [{url}]({url})".format(text=item.title, url=item.url),
                         parse_mode=ParseMode.MARKDOWN, reply_markup=reply_markup)
+        time.sleep(3)
 
 
 bot.sendMessage(chat_id="@MyHN_Bot", text="Everything is OK👌")
-scheduler.get_job(job_id="telegram").func()
 scheduler.start()
