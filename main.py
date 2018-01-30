@@ -19,7 +19,7 @@ scheduler = BlockingScheduler(timezone="Asia/Shanghai")
 
 @scheduler.scheduled_job('cron', id='telegram', hour=9)
 def message():
-    print("Send Message")
+    print("Send Message", flush=True)
     for story_id in hn.top_stories(limit=10):
         item = hn.get_item(story_id)
 
@@ -31,5 +31,6 @@ def message():
                         text="*{text}* [{url}]({url})".format(text=item.title, url=item.url),
                         parse_mode=ParseMode.MARKDOWN, reply_markup=reply_markup)
 
-bot.sendMessage(chat_id="@MyHN_Bot",text="Everything is OK👌")
+
+bot.sendMessage(chat_id="@MyHN_Bot", text="Everything is OK👌")
 scheduler.start()
